@@ -1,17 +1,19 @@
 package io.paymeter.assessment.domain.dto;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Currency;
 import java.util.Objects;
 
 @Getter
+@Setter
 public class Money {
 
     private static final Currency DEFAULT_CURRENCY = Currency.getInstance("EUR");
 
     private final int amount;
-    private final Currency currency;
+    private Currency currency;
 
     public Money(final int amount) {
         this.amount = amount;

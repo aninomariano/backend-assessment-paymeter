@@ -8,6 +8,10 @@ public class ApplicationException extends RuntimeException {
 
     private HttpStatus httpStatus;
 
+    public ApplicationException() {
+        super();
+    }
+
     public ApplicationException(final Throwable cause) {
         super(cause);
     }

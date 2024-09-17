@@ -1,27 +1,23 @@
 package io.paymeter.assessment.infrastructure.dto;
 
-import io.paymeter.assessment.domain.dto.Money;
 import io.paymeter.assessment.domain.strategy.Discount;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Value;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.keyvalue.annotation.KeySpace;
 
-import java.util.Currency;
 import java.util.Set;
 
-@Data
+@Value
 @Builder
-@KeySpace("employees")
+@KeySpace("parking")
 public class ParkingEntity {
 
     @Id
-    private String parkingId;
+    String parkingId;
 
-    private Money money;
+    MoneyEntity money;
 
-    private Set<Discount> discounts;
-
-    private String location;
+    Set<Discount> discounts;
 
 }

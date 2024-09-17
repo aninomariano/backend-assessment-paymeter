@@ -1,8 +1,10 @@
 package io.paymeter.assessment.domain.dto;
 
+import io.paymeter.assessment.domain.strategy.Discount;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Builder
 @Getter
@@ -22,4 +24,6 @@ public class ParkingCalculation {
     private long duration;
 
     private String price;
+
+    private Set<Discount> discounts;
 }

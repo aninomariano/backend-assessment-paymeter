@@ -2,7 +2,9 @@ package io.paymeter.assessment.application.controller.ticket;
 
 import io.paymeter.assessment.application.dto.request.ParkingRequest;
 import io.paymeter.assessment.application.dto.response.ParkingResponse;
-import io.paymeter.assessment.application.mapper.ParkingMapper;
+import io.paymeter.assessment.application.mapper.ParkingRequestMapper;
+import io.paymeter.assessment.application.mapper.ParkingResponseMapper;
+import io.paymeter.assessment.domain.dto.ParkingCalculation;
 import io.paymeter.assessment.domain.service.ParkingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +18,15 @@ public class TicketControllerImpl implements TicketController {
 
 	private final ParkingService parkingService;
 
-	private final ParkingMapper parkingMapper;
+	private final ParkingRequestMapper parkingRequestMapper;
+
+	private final ParkingResponseMapper parkingResponseMapper;
 
 	@Override
 	public ResponseEntity<ParkingResponse> calculate(final ParkingRequest request) {
-		parkingService.calculateParking(parkingMapper.map(request));
-		return ResponseEntity.of(Optional.of(new ParkingResponse()));
+		final ParkingCalculation parkingCalculation = parkingRequestMapper.map(request);
+		parkingService.calculateParking(parkingCalculation);
+		return ResponseEntity.of(Optional.of(parkingResponseMapper.map(parkingCalculation)));
 	}
 
 }

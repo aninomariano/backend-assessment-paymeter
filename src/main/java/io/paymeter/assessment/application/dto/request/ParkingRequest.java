@@ -1,14 +1,14 @@
 package io.paymeter.assessment.application.dto.request;
 
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
 public class ParkingRequest {
 
-    String parkingId;
+    private final String parkingId;
 
-    String from;
+    private final String from;
 
-    String to;
+    private final String to;
 
 }

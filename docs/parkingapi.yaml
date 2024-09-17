@@ -14,14 +14,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CalculatorRequest'
+              $ref: '#/components/schemas/ParkingRequest'
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CalculatorResponse'
+                $ref: '#/components/schemas/ParkingResponse'
         '400':
           description: The request is invalid.
         '404':
@@ -32,7 +32,7 @@ paths:
           description: Unexpected error
 components:
   schemas:
-    CalculatorRequest:
+    ParkingRequest:
       type: object
       properties:
         parkingId:
@@ -43,7 +43,7 @@ components:
         to:
           type: string
           format: ISO 8601 timestamp string
-    CalculatorResponse:
+    ParkingResponse:
       type: object
       properties:
         parkingId:
