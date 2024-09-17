@@ -3,45 +3,37 @@ package io.paymeter.assessment.domain.strategy;
 import io.paymeter.assessment.domain.dto.ParkingCalculation;
 import io.paymeter.assessment.domain.dto.Money;
 import io.paymeter.assessment.dto.ParkingLocation;
-import io.paymeter.assessment.infrastructure.repository.parking.Pricing;
+import io.paymeter.assessment.infrastructure.dto.Pricing;
 
 import java.time.Duration;
 
 public enum DailyDiscount implements Discount {
 
-    INSTANCE;
+    DAILY_DISCOUNT_INSTANCE;
+
+    private static final int DAILY_MAX_PRICE = 15;
+    private static final int TWENTY_FOUR = 24;
 
     @Override
-    public void executeDiscount(final ParkingCalculation parkingCalculation) {
-        final var pricing = new Pricing(2, new Money(2), ParkingLocation.ORDINO);
-        final long hours = Duration.between(parkingCalculation.getFrom(), parkingCalculation.getTo()).toHours();
-        final long discount = calculateDiscount(hours, pricing.pricePerHour());
+    public void calculateWithDiscount(final ParkingCalculation parkingCalculation) {
+        final Money money = parkingCalculation.getMoney();
+        final Duration duration = Duration.between(parkingCalculation.getFrom(), parkingCalculation.getTo());
+        final long hours = duration.toHours();
+        final long fullDays = (hours + 1) / TWENTY_FOUR;
 
-        return Calculation.builder()
-                .price(pricing.money().getCurrency().getSymbol() + pricing.pricePerHour())
-                .duration(hours)
-                .build();
+        parkingCalculation.setDuration(duration.toMinutes());
+        if (fullDays > 1) {
+            parkingCalculation.setPrice(calculateTotal(hours, fullDays, money.getAmount()) + money.getCurrency().getCurrencyCode());
+        }
     }
 
-    private long calculateDiscount(final long hours, final int pricePerHour) {
-        //TODO decorate an object not return the value
-
-        final long fullDays = hours / 24;
-        final double extraHours = (double) hours / fullDays;
-        final double result = extraHours - 24;
-        final double finalResult = Math.ceil(result * fullDays) + 1;
-
-        /*
-        value == 50 / 24 = 2.08
-
-mid == 50 / value first digit
-
-result == mid - 24
-
-final == result x mid
-
-         */
-
-        return (long) finalResult;
+    private long calculateTotal(final long hours, final long fullDays, final long hourlyPrice) {
+        return (fullDays * DAILY_MAX_PRICE) + (calculateExtraHours(hours, fullDays) * hourlyPrice);
     }
+
+    private long calculateExtraHours(final long hours, final long fullDays) {
+        final double extraHours = (double) (hours + 1) / fullDays;
+        return (long) Math.ceil((extraHours - TWENTY_FOUR) * fullDays);
+    }
+
 }

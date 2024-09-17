@@ -5,9 +5,9 @@ import io.paymeter.assessment.domain.dto.ParkingCalculation;
 public interface Discount {
 
     /**
-     * This method executes and decorates the pricing data depending on each location.
+     * This method calculates the pricing data depending on each discount strategy.
      *
      * @param parkingCalculation provided parking info.
      */
-    void executeDiscount(ParkingCalculation parkingCalculation);
+    void calculateWithDiscount(ParkingCalculation parkingCalculation);
 }

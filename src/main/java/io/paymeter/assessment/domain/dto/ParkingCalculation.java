@@ -1,25 +1,25 @@
 package io.paymeter.assessment.domain.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Builder
 @Getter
-@RequiredArgsConstructor
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ParkingCalculation {
 
-    private final String parkingId;
+    private String parkingId;
 
-    private final LocalDateTime from;
+    private LocalDateTime from;
 
-    private final LocalDateTime to;
+    private LocalDateTime to;
 
-    private final Money money;
+    private Money money;
 
-    private final long duration;
+    private long duration;
 
-    private final String price;
+    private String price;
 }

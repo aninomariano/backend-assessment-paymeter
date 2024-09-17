@@ -1,9 +1,9 @@
 package io.paymeter.assessment.application.dto.response;
 
-import lombok.Builder;
+import lombok.Data;
 import lombok.Value;
 
-@Value
+@Data
 public class ParkingResponse {
 
     String parkingId;

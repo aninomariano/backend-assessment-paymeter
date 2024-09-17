@@ -1,17 +1,17 @@
-package io.paymeter.assessment.application.mapper;
+package io.paymeter.assessment.infrastructure.mapper;
 
+import io.paymeter.assessment.application.dto.request.ParkingRequest;
 import io.paymeter.assessment.application.exception.InvalidDateException;
 import io.paymeter.assessment.domain.dto.ParkingCalculation;
-import io.paymeter.assessment.application.dto.request.ParkingRequest;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 @Mapper(componentModel = "spring")
-public interface ParkingMapper {
+public interface ParkingEntityMapper {
 
     @Mapping(source = "parkingRequest.from", target = "from", qualifiedByName = "date")
     @Mapping(source = "parkingRequest.to", target = "to", qualifiedByName = "date")

@@ -10,4 +10,5 @@ public interface ParkingService {
      * @param parkingCalculation the parking calculation clear instance
      */
     void calculateParking(ParkingCalculation parkingCalculation);
+
 }

@@ -1,10 +1,11 @@
 package io.paymeter.assessment.application.configuration;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.time.Clock;
 
-@org.springframework.context.annotation.Configuration
+@Configuration
 public class Bindings {
 
     @Bean

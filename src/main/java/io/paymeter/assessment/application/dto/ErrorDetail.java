@@ -1,17 +1,16 @@
 package io.paymeter.assessment.application.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
+@AllArgsConstructor
 public class ErrorDetail {
 
     private Date timestamp;
     private String message;
     private String details;
-
-    public ErrorDetail(Date timestamp, String message, String details) {
-        this.timestamp = timestamp;
-        this.message = message;
-        this.details = details;
-    }
-
+    private int status;
 }

@@ -3,6 +3,7 @@ package io.paymeter.assessment.strategy;
 import io.paymeter.assessment.domain.dto.Money;
 import io.paymeter.assessment.domain.dto.ParkingCalculation;
 import io.paymeter.assessment.domain.strategy.DailyDiscount;
+import io.paymeter.assessment.domain.strategy.HalfDayDiscount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,28 +15,30 @@ import java.time.format.DateTimeFormatter;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-public class DailyDiscountTest {
+public class HalfDayDiscountTest {
 
-    private DailyDiscount dailyDiscount;
+    private HalfDayDiscount halfDayDiscount;
 
     @BeforeEach
     void setUp() {
-        dailyDiscount = DailyDiscount.DAILY_DISCOUNT_INSTANCE;
+        halfDayDiscount = HalfDayDiscount.HALF_DAY_DISCOUNT_INSTANCE;
     }
 
     @Test
     void testMethod() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-        LocalDateTime from = LocalDateTime.parse("2014-11-25T10:00:00", formatter);
-        LocalDateTime to = LocalDateTime.parse("2014-11-25T15:00:00", formatter);
+        LocalDateTime from = LocalDateTime.parse("2014-11-25T10:00:20", formatter);
+        LocalDateTime to = LocalDateTime.parse("2014-11-26T09:00:00", formatter);
         final ParkingCalculation parkingCalculation = ParkingCalculation.builder()
                 .from(from)
                 .to(to)
-                .money(new Money(2))
+                .money(new Money(3))
                 .build();
 
-        dailyDiscount.calculateWithDiscount(parkingCalculation);
+        halfDayDiscount.calculateWithDiscount(parkingCalculation);
 
         assertThat(parkingCalculation.getPrice()).isNotBlank();
+
+
     }
 }

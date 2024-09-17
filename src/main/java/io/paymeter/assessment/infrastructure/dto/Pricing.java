@@ -1,4 +1,4 @@
-package io.paymeter.assessment.infrastructure.repository.parking;
+package io.paymeter.assessment.infrastructure.dto;
 
 import io.paymeter.assessment.domain.dto.Money;
 import io.paymeter.assessment.dto.ParkingLocation;
