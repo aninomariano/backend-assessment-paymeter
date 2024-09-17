@@ -54,7 +54,7 @@ docker run --rm -u gradle -v "$PWD":/home/gradle/project -w /home/gradle/project
 
 Our customers want to be sure they're properly charging the correct amount on their parkings. 
 For this reason, we plan to create a new pricing calculation feature so they can test multiple scenarios.
-We have two customers with one parking each:
+We have two customers with one parkingCalculation each:
 
 * Customer 1:
   * Parking id: `P000123`
@@ -71,10 +71,10 @@ We have two customers with one parking each:
 
 Note:
   * The price of a fraction of an hour is the same as a full hour
-  * If duration of the stay is less than one minute, parking is free
+  * If duration of the stay is less than one minute, parkingCalculation is free
   * There's no max time for a stay
   * There's no limit of times that max price discount can be applied
-  * Max price discount starts counting when entering the parking 
+  * Max price discount starts counting when entering the parkingCalculation 
 
 Requirements:
 * Endpoint: POST `/tickets/calculate`
@@ -95,7 +95,7 @@ Requirements:
   * Status codes:
     * 200 ok
     * 400 invalid request
-    * 404 parking not found
+    * 404 parkingCalculation not found
     * 500 server error
     * (feel free to return any status codes needed)
 

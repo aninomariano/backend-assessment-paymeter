@@ -1,0 +1,60 @@
+openapi: 3.0.0
+info:
+  title: Parking API
+  description: This API returns the park price based on each parking.
+  version: 0.0.1
+servers:
+  - url: http://localhost:8080
+    description: Main (production) server
+paths:
+  /tickets/calculate:
+    post:
+      summary: Returns the detailed ticket price.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculatorRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatorResponse'
+        '400':
+          description: The request is invalid.
+        '404':
+          description: Parking not found.
+        '500':
+          description: Internal server error.
+        default:
+          description: Unexpected error
+components:
+  schemas:
+    CalculatorRequest:
+      type: object
+      properties:
+        parkingId:
+          type: string
+        from:
+          type: string
+          format: ISO 8601 timestamp string
+        to:
+          type: string
+          format: ISO 8601 timestamp string
+    CalculatorResponse:
+      type: object
+      properties:
+        parkingId:
+          type: string
+        from:
+          type: string
+          format: ISO 8601 timestamp string
+        to:
+          type: string
+          format: ISO 8601 timestamp string
+        duration:
+          type: integer
+        price:
+          type: string
