@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 
 public class InvalidDateException extends ApplicationException {
 
-    public InvalidDateException() {
-        super();
+    public InvalidDateException(final String applicationMessage) {
+        super(applicationMessage);
     }
 
     public InvalidDateException(final Throwable cause) {

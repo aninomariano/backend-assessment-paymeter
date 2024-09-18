@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 
 public class ParkingNotFoundException extends ApplicationException {
 
-    public ParkingNotFoundException() {
-        super();
+    public ParkingNotFoundException(final String applicationMessage) {
+        super(applicationMessage);
     }
 
     public ParkingNotFoundException(final Throwable cause) {

@@ -19,11 +19,7 @@ public interface ParkingResponseMapper {
 
     @Named("date")
     default String parseDate(final LocalDateTime date) {
-        try {
-            return date.toString();
-        } catch (final NullPointerException e) {
-            throw new InvalidDateFormatException(e);
-        }
+        return date.toString();
     }
 
 }

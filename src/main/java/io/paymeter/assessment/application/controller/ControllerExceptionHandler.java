@@ -16,22 +16,22 @@ import java.util.Date;
 public class ControllerExceptionHandler {
 
     @ExceptionHandler(InvalidDateFormatException.class)
-    public ResponseEntity<?> handleInvalidDateFormatException(final InvalidDateFormatException ex, final WebRequest request) {
-        final ErrorDetail errorDetail = new ErrorDetail(new Date(), "The date sent does not comply with ISO 8601.",
+    public ResponseEntity<ErrorDetail> handleInvalidDateFormatException(final InvalidDateFormatException ex, final WebRequest request) {
+        final ErrorDetail errorDetail = new ErrorDetail(new Date(), ex.getApplicationMessage(),
                 request.getDescription(false), HttpStatus.BAD_REQUEST.value());
         return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ParkingNotFoundException.class)
-    public ResponseEntity<?> handleParkingNotFoundException(final ParkingNotFoundException ex, final WebRequest request) {
-        final ErrorDetail errorDetail = new ErrorDetail(new Date(), "Parking not found.",
+    public ResponseEntity<ErrorDetail> handleParkingNotFoundException(final ParkingNotFoundException ex, final WebRequest request) {
+        final ErrorDetail errorDetail = new ErrorDetail(new Date(), ex.getApplicationMessage(),
                 request.getDescription(false), HttpStatus.NOT_FOUND.value());
         return new ResponseEntity<>(errorDetail, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(InvalidDateException.class)
-    public ResponseEntity<?> handleInvalidDateException(final InvalidDateException ex, final WebRequest request) {
-        final ErrorDetail errorDetail = new ErrorDetail(new Date(), "The parking end date is not correct.",
+    public ResponseEntity<ErrorDetail> handleInvalidDateException(final InvalidDateException ex, final WebRequest request) {
+        final ErrorDetail errorDetail = new ErrorDetail(new Date(), ex.getApplicationMessage(),
                 request.getDescription(false), HttpStatus.BAD_REQUEST.value());
         return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);
     }

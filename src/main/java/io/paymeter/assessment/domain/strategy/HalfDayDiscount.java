@@ -19,15 +19,19 @@ public enum HalfDayDiscount implements Discount {
         final Duration duration = Duration.     between(parkingCalculation.getFrom(), parkingCalculation.getTo());
         final long hours = duration.toHours();
         DiscountUtils.validateParkingEndDate(hours);
-        final long fullDays = (hours + 1) / TWELVE;
+        final long fullDays = hours / TWELVE;
 
         if (hours > 12) {
-            parkingCalculation.setDuration(duration.toMinutes());
             parkingCalculation.setPrice(DiscountUtils.calculatePriceWithMinutes(TWELVE, fullDays, money, hours,
                     HALF_DAY_MAX_PRICE, duration) + money.getCurrency().getCurrencyCode());
+        } else if (hours == 0) {
+            parkingCalculation.setPrice((0 + money.getCurrency().getCurrencyCode()));
+        } else if (hours == 1){
+            parkingCalculation.setPrice((hours * money.getAmount()) + money.getCurrency().getCurrencyCode());
         } else {
-            parkingCalculation.setDuration(duration.toMinutes());
-            parkingCalculation.setPrice((hours * money.getAmount()) - money.getAmount() + money.getCurrency().getCurrencyCode());
+            parkingCalculation.setPrice((DiscountUtils.calculatePriceWithMinutes(TWELVE, fullDays, money, hours,
+                    HALF_DAY_MAX_PRICE, duration) - money.getAmount()) + money.getCurrency().getCurrencyCode());
         }
+        parkingCalculation.setDuration(duration.toMinutes());
     }
 }

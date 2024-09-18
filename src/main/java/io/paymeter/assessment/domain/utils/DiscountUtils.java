@@ -11,7 +11,8 @@ import java.util.function.Supplier;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DiscountUtils {
 
-    private static final Supplier<InvalidDateException> INVALID_DATE_EXCEPTION_SUPPLIER = InvalidDateException::new;
+    private static final Supplier<InvalidDateException> INVALID_DATE_EXCEPTION_SUPPLIER =
+            () -> new InvalidDateException("The parking end date is not correct.");
 
     public static long calculatePriceWithMinutes(final int parkingPortion, final long fullDays, final Money money,
                                                  final long hours, final int maxTimePrice, final Duration duration) {

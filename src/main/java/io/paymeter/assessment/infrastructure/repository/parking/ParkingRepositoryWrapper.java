@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 public class ParkingRepositoryWrapper implements RepositoryWrapper<ParkingEntity> {
 
     private static final Supplier<ParkingNotFoundException> PARKING_NOT_FOUND_EXCEPTION_SUPPLIER =
-            ParkingNotFoundException::new;
+            () -> new ParkingNotFoundException("Parking not found.");
 
     private final ParkingRepository parkingRepository;
 

@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 public class ApplicationException extends RuntimeException {
 
     private HttpStatus httpStatus;
+    private String applicationMessage;
 
-    public ApplicationException() {
+    public ApplicationException(final String applicationMessage) {
         super();
+        this.applicationMessage = applicationMessage;
     }
 
     public ApplicationException(final Throwable cause) {

@@ -28,7 +28,7 @@ public interface ParkingRequestMapper {
         } catch (final NullPointerException e) {
             return null;
         } catch (final DateTimeParseException | IllegalArgumentException | UnsupportedOperationException e) {
-            throw new InvalidDateFormatException(e);
+            throw new InvalidDateFormatException("The date sent does not comply with ISO 8601.");
         }
     }
 
