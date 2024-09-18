@@ -1,4 +1,4 @@
-package io.paymeter.assessment.pricing;
+package io.paymeter.assessment.domain.dto;
 
 import org.junit.jupiter.api.Test;
 
