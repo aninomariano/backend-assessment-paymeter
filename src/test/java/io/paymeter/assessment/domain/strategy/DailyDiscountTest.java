@@ -3,7 +3,6 @@ package io.paymeter.assessment.domain.strategy;
 import io.paymeter.assessment.application.exception.InvalidDateException;
 import io.paymeter.assessment.domain.dto.Money;
 import io.paymeter.assessment.domain.dto.ParkingCalculation;
-import io.paymeter.assessment.domain.strategy.DailyDiscount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

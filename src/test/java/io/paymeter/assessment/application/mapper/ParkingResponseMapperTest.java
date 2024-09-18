@@ -1,6 +1,5 @@
 package io.paymeter.assessment.application.mapper;
 
-import io.paymeter.assessment.application.exception.InvalidDateFormatException;
 import io.paymeter.assessment.domain.dto.ParkingCalculation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
